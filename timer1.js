@@ -1,20 +1,24 @@
 // Implement an alarm clock / timer which will beep after a specified amount of time has passed. The user can specify an unlimited number of alarms using command line arguments
 
 let args = process.argv.slice(2)
-// let numOfArgs = args.length; 
-// let lastOfArgs = args[args.length - 1]; //Helps me to find the last item written in the terminal
+let numOfArgs = args.length; 
+let lastOfArgs = args[args.length - 1]; //Helps me to find the last item written in the terminal
+
 
 for(const arg of args){
+  let delay = 1000
   if (!isNaN(arg) && arg >= 0) { 
     //!isNan -> is not not a number (therefore, is a number) and it's a natural number)
     setTimeout(() => {
       process.stdout.write(`ding `); //process.stdout.write('\x07') I cannot hear the sound
-    }, arg * 1000);
+    }, arg * delay);
   }
-  // setTimeout(() => {               //I want to fix the new line at the end but...when!?
-  //   process.stdout.write("\n");
-  // }, 0);
+    setTimeout(() => {               
+    process.stdout.write("\n");
+  }, lastOfArgs * delay + 1); //+1 so the new line happens after the last arg
 }
+
+//I don't know why it prints everything properly, even the new line, but leavces three spaces
 
 /*
 Alternative suggested, but uses arrow function and forEach loop and I feel I control more the code above
